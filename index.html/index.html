@@ -36,26 +36,9 @@
 
 </head>
 
-    <meta name="author" content="Shika Luku">
-
-    <!-- Google Search Verification -->
-    <meta
-        name="google-site-verification"
-        content="G-bLn6pioIfKtPZejl-7StX7TFhtMVOua5PvLCFiCZ8"
-    >
-
-    <!-- Main Stylesheet -->
-    <link rel="stylesheet" href="style.css">
-
-    <!-- Preferred Website URL -->
-    <link
-        rel="canonical"
-        href="https://edradiator.github.io/my-product-website/"
-    >
-
-</head>
 
 <body>
+
 
 <!-- ========================================
      NAVIGATION
@@ -129,6 +112,9 @@
         carefully selected to bring your style to life.
     </p>
 
+
+    <!-- VIEW ALL PRODUCTS -->
+
     <button
         class="view-all-button"
         onclick="showAllProducts()"
@@ -137,14 +123,26 @@
     </button>
 
 
-    <!-- PRODUCT GRID -->
+    <!-- SELECTED CATEGORY INDICATOR -->
+
+    <p
+        id="selected-category"
+        class="selected-category"
+    >
+        SHOWING ALL PRODUCTS
+    </p>
+
+
+    <!-- ==================================
+         PRODUCT GRID
+    ================================== -->
 
     <div class="product-grid">
 
 
         <!-- ==================================
              CLASSIC SHIRT
-        =================================== -->
+        ================================== -->
 
         <div
             class="product-card"
@@ -169,11 +167,13 @@
             </h3>
 
             <p class="product-description">
-                A versatile everyday shirt designed
-                for effortless, modern style.
+                A versatile everyday shirt designed for
+                effortless, modern style. Perfect for casual
+                outings, everyday wear and creating a clean,
+                confident look.
             </p>
 
-            <p>
+            <p class="product-price">
                 KSh 2,500
             </p>
 
@@ -189,7 +189,7 @@
 
         <!-- ==================================
              URBAN SNEAKERS
-        =================================== -->
+        ================================== -->
 
         <div
             class="product-card"
@@ -199,6 +199,7 @@
             <div class="product-image">
 
                 <span>
+                    URBAN SNEAKERS<br>
                     IMAGE COMING SOON
                 </span>
 
@@ -213,11 +214,11 @@
             </h3>
 
             <p class="product-description">
-                Everyday sneakers designed to bring
-                comfort and style to your look.
+                Everyday sneakers designed to bring comfort
+                and modern style to your casual looks.
             </p>
 
-            <p>
+            <p class="product-price">
                 KSh 4,500
             </p>
 
@@ -233,7 +234,7 @@
 
         <!-- ==================================
              PREMIUM JACKET
-        =================================== -->
+        ================================== -->
 
         <div
             class="product-card"
@@ -243,6 +244,7 @@
             <div class="product-image">
 
                 <span>
+                    PREMIUM JACKET<br>
                     IMAGE COMING SOON
                 </span>
 
@@ -257,11 +259,12 @@
             </h3>
 
             <p class="product-description">
-                A statement outerwear piece selected
-                for its unique character and style.
+                A unique thrift jacket selected to add
+                character, versatility and effortless style
+                to your wardrobe.
             </p>
 
-            <p>
+            <p class="product-price">
                 KSh 5,500
             </p>
 
@@ -279,7 +282,7 @@
 
     <!-- ==================================
          NO PRODUCTS MESSAGE
-    =================================== -->
+    ================================== -->
 
     <div
         id="no-products-message"
@@ -329,7 +332,7 @@
 
         <a
             href="#shop"
-            class="category-card"
+            class="category-card category-clothing"
             data-filter="clothing"
         >
 
@@ -348,7 +351,7 @@
 
         <a
             href="#shop"
-            class="category-card"
+            class="category-card category-footwear"
             data-filter="footwear"
         >
 
@@ -367,7 +370,7 @@
 
         <a
             href="#shop"
-            class="category-card"
+            class="category-card category-outerwear"
             data-filter="outerwear"
         >
 
@@ -386,7 +389,7 @@
 
         <a
             href="#shop"
-            class="category-card"
+            class="category-card category-swimwear"
             data-filter="swimwear"
         >
 
@@ -405,7 +408,7 @@
 
         <a
             href="#shop"
-            class="category-card"
+            class="category-card category-accessories"
             data-filter="accessories"
         >
 
@@ -424,7 +427,7 @@
 
         <a
             href="#shop"
-            class="category-card"
+            class="category-card category-riding"
             data-filter="riding"
         >
 
@@ -437,6 +440,7 @@
             </p>
 
         </a>
+
 
     </div>
 
@@ -539,6 +543,7 @@
                 id="name"
                 name="name"
                 placeholder="Enter your name"
+                required
             >
 
         </p>
@@ -554,6 +559,7 @@
                 id="message"
                 name="message"
                 placeholder="Write your message"
+                required
             ></textarea>
 
         </p>
@@ -582,7 +588,6 @@
         MODERN STYLE. YOUR STATEMENT.
     </p>
 
-
     <p>
 
         <a href="mailto:kamaaedwin23@gmail.com">
@@ -591,7 +596,6 @@
 
     </p>
 
-
     <p>
 
         <a href="https://wa.me/254720603370">
@@ -599,7 +603,6 @@
         </a>
 
     </p>
-
 
     <p>
         © 2026 Shika Luku. All rights reserved.
@@ -614,6 +617,10 @@
 
 <script>
 
+/* ========================================
+   GET PAGE ELEMENTS
+======================================== */
+
 const categoryCards =
     document.querySelectorAll(".category-card");
 
@@ -622,6 +629,9 @@ const productCards =
 
 const noProductsMessage =
     document.querySelector("#no-products-message");
+
+const selectedCategory =
+    document.querySelector("#selected-category");
 
 
 /* ========================================
@@ -634,17 +644,27 @@ categoryCards.forEach(card => {
 
         event.preventDefault();
 
-        const selectedCategory =
+        /* Get selected category */
+        const category =
             this.dataset.filter;
+
+
+        /* Update category indicator */
+
+        selectedCategory.textContent =
+            "SHOWING: " +
+            category.toUpperCase();
+
 
         let productsFound = false;
 
 
+        /* Show matching products */
+
         productCards.forEach(product => {
 
             if (
-                product.dataset.category ===
-                selectedCategory
+                product.dataset.category === category
             ) {
 
                 product.style.display = "block";
@@ -660,6 +680,8 @@ categoryCards.forEach(card => {
         });
 
 
+        /* Show or hide coming soon message */
+
         if (productsFound) {
 
             noProductsMessage.style.display =
@@ -672,6 +694,8 @@ categoryCards.forEach(card => {
 
         }
 
+
+        /* Scroll back to shop */
 
         document
             .querySelector("#shop")
@@ -690,6 +714,8 @@ categoryCards.forEach(card => {
 
 function showAllProducts() {
 
+    /* Show every product */
+
     productCards.forEach(product => {
 
         product.style.display = "block";
@@ -697,9 +723,19 @@ function showAllProducts() {
     });
 
 
+    /* Hide coming soon message */
+
     noProductsMessage.style.display =
         "none";
 
+
+    /* Reset category indicator */
+
+    selectedCategory.textContent =
+        "SHOWING ALL PRODUCTS";
+
+
+    /* Scroll to shop */
 
     document
         .querySelector("#shop")

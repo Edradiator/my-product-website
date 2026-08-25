@@ -302,8 +302,11 @@ nav {
 .product-image span {
     font-size: 12px;
     letter-spacing: 2px;
+    line-height: 1.8;
     color: #777777;
     font-weight: bold;
+    text-align: center;
+    padding: 20px;
 }
 
 
@@ -933,4 +936,57 @@ footer a:hover {
         font-size: 26px;
     }
 
+}/* ========================================
+   CATEGORY-SPECIFIC STYLES
+======================================== */
+
+.category-clothing {
+    background: linear-gradient(135deg, #ebe7df, #d8d2c8);
+}
+
+.category-footwear {
+    background: linear-gradient(135deg, #e5e5e5, #cfcfcf);
+}
+
+.category-outerwear {
+    background: linear-gradient(135deg, #dedbd5, #c5c0b8);
+}
+
+.category-swimwear {
+    background: linear-gradient(135deg, #e4e8e7, #cbd3d1);
+}
+
+.category-accessories {
+    background: linear-gradient(135deg, #e8e3da, #d3c9bb);
+}
+
+.category-riding {
+    background: linear-gradient(135deg, #d9d9d7, #bdbdb9);
+}
+
+
+/* Hover effect */
+
+.category-clothing:hover,
+.category-footwear:hover,
+.category-outerwear:hover,
+.category-swimwear:hover,
+.category-accessories:hover,
+.category-riding:hover {
+    transform: translateY(-8px);
+/* ========================================
+   SELECTED CATEGORY INDICATOR
+======================================== */
+
+.selected-category {
+    display: block;
+    width: fit-content;
+    margin: 0 auto 35px;
+    padding: 8px 16px;
+    background-color: #e5e1da;
+    color: #111111;
+    font-size: 11px;
+    font-weight: bold;
+    letter-spacing: 2px;
+    border-radius: 20px;
 }
