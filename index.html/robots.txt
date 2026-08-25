@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://edradiator.github.io/my-product-website/sitemap.xml
